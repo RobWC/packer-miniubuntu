@@ -10,3 +10,5 @@ sudo /tmp/vmware-tools-distrib/vmware-install.pl --default
 rm /tmp/linux.iso
 sudo umount /mnt/cdrom
 sudo rmdir /mnt/cdrom
+echo "answer AUTO_KMODS_ENABLED yes" | sudo tee -a /etc/vmware-tools/locations
+sudo apt-get install -y linux-signed-generic-lts-trusty

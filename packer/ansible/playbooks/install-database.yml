@@ -61,7 +61,7 @@
 
     - name: Setup MySQL creds for root user
       template:
-        src: "templates/mysql"
+        src: "/tmp/mysql"
         dest: "/root/.my.cnf"
         owner: "root"
         mode: 0600

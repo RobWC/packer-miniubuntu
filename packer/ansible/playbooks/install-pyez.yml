@@ -1,0 +1,33 @@
+---
+- name: Install PyEZ
+  hosts: all
+  remote_user: vagrant
+  sudo: yes
+  gather_facts: no
+  tasks:
+      - name: Install Python Packages
+        apt: pkg={{ item }} state=latest
+        with_items:
+            - software-properties-common
+            - python-dev
+            - libxml2-dev
+            - libxslt-dev
+            - python-lxml
+
+      - name: Install PIP Packages
+        pip: name={{ item }}
+        with_items:
+            - junos-eznc
+            - junos-netconify
+
+      - name: Install Ansible Galaxy Modules
+        shell: ansible-galaxy install Juniper.junos
+
+      - name: Remove default ansible config
+        shell: rm -fr /etc/ansible/ansible.cfg
+
+      - name: Set path to ansible modules in Vagrant users directory
+        lineinfile: dest=/home/vagrant/.bashrc state=present regexp='^export ANSIBLE_LIBRARY=/etc/ansible/roles:/usr/share/pyshared' line='export ANSIBLE_LIBRARY=/etc/ansible/roles:/usr/share/pyshared'
+
+      - name: Disable Ansible Host Key Checking
+        lineinfile: dest=/home/vagrant/.bashrc state=present regexp='^export ANSIBLE_HOST_KEY_CHECKING=False' line='export ANSIBLE_HOST_KEY_CHECKING=False'

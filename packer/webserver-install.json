@@ -1,6 +1,6 @@
 {
     "variables": {
-        "hostname": "MiniUbuntu",
+        "hostname": "WebServerMiniUbuntu",
         "domain":"NetDevOps.us"
     },
     "provisioners": [{
@@ -19,8 +19,17 @@
         "type": "shell",
         "scripts": [
             "scripts/vagrant.sh",
+            "scripts/install-ansible.sh",
             "scripts/cleanup.sh"
         ]
+    },{
+        "type":"ansible-local",
+        "inventory_groups":"web_servers",
+        "playbook_file": "ansible/playbooks/install-webserver.yml"
+    },{
+        "type":"ansible-local",
+        "inventory_groups":"web_servers",
+        "playbook_file": "ansible/playbooks/install-pyez.yml"
     }],
     "builders": [{
       "type": "virtualbox-iso",
@@ -43,7 +52,7 @@
       "vboxmanage_post":[
           ["modifyhd", "output-virtualbox-iso/{{.Name}}.vdi", "--compact"]
       ],
-      "vm_name": "{{user `hostname`}}",
+      "vm_name": "WebServerMiniUbuntu",
       "boot_command":[
         "<esc><esc><enter><wait>",
         "/install/vmlinuz auto",
@@ -80,8 +89,8 @@
       "iso_checksum": "83aabd8dcf1e8f469f3c72fff2375195",
       "iso_checksum_type": "md5",
       "shutdown_command": "sudo shutdown -P now",
-      "vmdk_name":"MiniUbuntu",
-      "vm_name":"MiniUbuntu",
+      "vmdk_name":"WebServerMiniUbuntu",
+      "vm_name":"WebServerMiniUbuntu",
       "vmx_data":{
         "memsize": "512",
         "numvcpus":"1"
@@ -111,7 +120,7 @@
       }],
     "post-processors": [{
         "type": "vagrant",
-        "output": "../vagrant_boxes/MiniUbuntu_{{.Provider}}.box",
-        "vagrantfile_template":"./vagrantfiles/ubuntu-vagrant.template"
+        "output": "../vagrant_boxes/WebServerMiniUbuntu_{{.Provider}}.box",
+        "vagrantfile_template":"./vagrantfiles/ubuntu-vagrant-database.template"
     }]
 }

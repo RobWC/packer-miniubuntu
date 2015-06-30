@@ -39,7 +39,7 @@ d-i	base-installer/kernel/headers	boolean false
 tasksel	tasksel/skip-tasks	string standard
 d-i pkgsel/install-recommends false
 d-i	pkgsel/install-language-support	boolean false
-d-i pkgsel/include string openssh-server build-essential dkms
+d-i pkgsel/include string openssh-server build-essential curl sshpass dkms
 d-i pkgsel/update-policy select unattended-upgrades
 popularity-contest popularity-contest/participate boolean false
 d-i pkgsel/updatedb boolean false

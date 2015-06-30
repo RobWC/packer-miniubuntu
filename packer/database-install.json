@@ -19,13 +19,18 @@
         "type": "shell",
         "scripts": [
             "scripts/vagrant.sh",
+            "scripts/install-ansible.sh",
             "scripts/cleanup.sh"
         ]
     },{
+        "type":"file",
+        "source": "ansible/playbooks/templates/mysql",
+        "destination":"/tmp/mysql"
+    },{
         "type":"ansible-local",
         "inventory_groups":"database_servers",
-        "playbook_file":"ansible/playbooks/install-database.yml"
-        }],
+        "playbook_file": "ansible/playbooks/install-database.yml"
+    }],
     "builders": [{
       "type": "virtualbox-iso",
       "disk_size": 6192,
