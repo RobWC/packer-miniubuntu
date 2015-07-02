@@ -71,7 +71,6 @@
         " locale=en_US",
         " netcfg/get_domain={{user `domain`}}",
         " netcfg/get_hostname={{user `hostname`}}",
-        " netcfg/choose_interface=eth0 ",
         " noapic",
         "--",
         "<enter>"]
@@ -93,7 +92,7 @@
       "vmdk_name":"WebServerMiniUbuntu",
       "vm_name":"WebServerMiniUbuntu",
       "vmx_data":{
-        "memsize": "1024",
+        "memsize": "1",
         "numvcpus":"1",
         "ethernet0.present":"true",
         "ethernet0.startConnected":"true",
@@ -118,7 +117,6 @@
         " locale=en_US",
         " netcfg/get_domain={{user `domain`}}",
         " netcfg/get_hostname={{user `hostname`}}",
-        " netcfg/choose_interface=eth0 ",
         " noapic",
         "--",
         "<enter>"]
