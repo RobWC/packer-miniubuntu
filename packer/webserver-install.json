@@ -46,7 +46,7 @@
       "boot_wait":"4s",
       "hard_drive_interface":"sata",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "512"],
+        ["modifyvm", "{{.Name}}", "--memory", "1024"],
         ["modifyvm", "{{.Name}}", "--cpus", "1"]
       ],
       "vboxmanage_post":[
@@ -71,6 +71,7 @@
         " locale=en_US",
         " netcfg/get_domain={{user `domain`}}",
         " netcfg/get_hostname={{user `hostname`}}",
+        " netcfg/choose_interface=eth0 ",
         " noapic",
         "--",
         "<enter>"]
@@ -92,8 +93,11 @@
       "vmdk_name":"WebServerMiniUbuntu",
       "vm_name":"WebServerMiniUbuntu",
       "vmx_data":{
-        "memsize": "512",
-        "numvcpus":"1"
+        "memsize": "1024",
+        "numvcpus":"1",
+        "ethernet0.present":"true",
+        "ethernet0.startConnected":"true",
+        "ethernet0.virtualDev":"e1000"
       },
       "boot_wait":"4s",
       "boot_command":[
@@ -114,6 +118,7 @@
         " locale=en_US",
         " netcfg/get_domain={{user `domain`}}",
         " netcfg/get_hostname={{user `hostname`}}",
+        " netcfg/choose_interface=eth0 ",
         " noapic",
         "--",
         "<enter>"]
